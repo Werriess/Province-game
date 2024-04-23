@@ -5,16 +5,15 @@ screen = turtle.Screen()
 screen.title("Province quiz!")
 screenTk = screen.getcanvas().winfo_toplevel()
 screenTk.attributes("-fullscreen", True)
-# image = "C:/Users/werne/OneDrive/Desktop/Projects/Python/South Africa Game/images/blank-map-of-south-africa.gif"
-# screen.bgpic(image)
 
-data = pd.read_csv("C:/Users/werne/OneDrive/Desktop/Projects/Python/South Africa Game/Province Coordinates Python Game New.csv",  sep=";")
+data = pd.read_csv("C:/Users/werne/OneDrive/Desktop/Projects/Python/South Africa Game/Province-game/Province Coordinates Python Game New.csv",  sep=";")
 
 mp = pd.read_csv("C:/Users/werne/Downloads/Mpumalanga.csv", sep=";")
-
+sa = pd.read_csv("C:/Users/werne/Downloads/South Africa Map Coordinates.csv", sep=";")
 dt = pd.read_csv("C:/Users/werne/Downloads/KZN Newer.csv", sep=";")
 
 ted = turtle.Turtle() 
+ted.speed(10)
 ted.penup()
 
 def set_land(x, y):
@@ -33,6 +32,14 @@ def set_word(x, y, word):
 def toets(kyk):
     for index, row_t in kyk.iterrows():
                 set_land(row_t["x"], row_t["y"])
+                
+begin = screen.textinput(title="SA Province guessing game!", prompt="Type begin to start")
+toets(sa)
+ted.clear()
+
+
+image = "C:/Users/werne/OneDrive/Desktop/Projects/Python/South Africa Game/Province-game/images/blank-map-of-south-africa.gif"
+screen.bgpic(image)
 
 while True:
     user_answer = screen.textinput(title="Guess the province", prompt="Enter the name of a province:")
@@ -41,11 +48,9 @@ while True:
     for index, row in data.iterrows():
         if user_answer.lower() == row["Province"].lower():
                 if row["Province"] == "Gauteng":
-                    toets(dt)
                     set_word(row["x"], row["y"], row["Province"])
                     ted.penup()
                 else:
-                    toets(mp)
                     set_word(row["x"], row["y"], row["Province"])
                     ted.penup()
             
