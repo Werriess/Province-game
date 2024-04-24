@@ -2,9 +2,7 @@ import turtle
 import pandas as pd
 
 screen = turtle.Screen()
-screen.title("Province quiz!")
-screenTk = screen.getcanvas().winfo_toplevel()
-screenTk.attributes("-fullscreen", True)
+screen.setup(width=601, height=751)
 
 data = pd.read_csv("C:/Users/werne/OneDrive/Desktop/Projects/Python/South Africa Game/Province-game/Province Coordinates Python Game New.csv",  sep=";")
 
@@ -29,19 +27,21 @@ def set_word(x, y, word):
     turtle.write(word, align="center", font=("Arial", 10, "normal"))
     turtle.hideturtle() 
 
-def toets(kyk):
-    for index, row_t in kyk.iterrows():
+def draw_map(data):
+    for index, row_t in data.iterrows():
                 set_land(row_t["x"], row_t["y"])
                 
 begin = screen.textinput(title="SA Province guessing game!", prompt="Type begin to start")
-toets(sa)
+draw_map(sa)
 ted.clear()
 
 
 image = "C:/Users/werne/OneDrive/Desktop/Projects/Python/South Africa Game/Province-game/images/blank-map-of-south-africa.gif"
 screen.bgpic(image)
 
-while True:
+count = 0
+
+while count < 9:
     user_answer = screen.textinput(title="Guess the province", prompt="Enter the name of a province:")
     if user_answer.lower() == "quit" or user_answer.lower() == "exit":
         break
@@ -50,16 +50,45 @@ while True:
                 if row["Province"] == "Gauteng":
                     set_word(row["x"], row["y"], row["Province"])
                     ted.penup()
-                else:
+                    count+=1
+                elif row["Province"] == "Mpumalanga":
                     set_word(row["x"], row["y"], row["Province"])
                     ted.penup()
-            
+                    count+=1
+                elif row["Province"] == "KwaZulu-Natal":
+                    set_word(row["x"], row["y"], row["Province"])
+                    ted.penup()
+                    count+=1
+                elif row["Province"] == "North West":
+                    set_word(row["x"], row["y"], row["Province"])
+                    ted.penup()
+                    count+=1
+                elif row["Province"] == "Northern Cape":
+                    set_word(row["x"], row["y"], row["Province"])
+                    ted.penup()
+                    count+=1
+                elif row["Province"] == "Eastern Cape":
+                    set_word(row["x"], row["y"], row["Province"])
+                    ted.penup()
+                    count+=1
+                elif row["Province"] == "Free State":
+                    set_word(row["x"], row["y"], row["Province"])
+                    ted.penup()
+                    count+=1
+                elif row["Province"] == "Limpopo":
+                    set_word(row["x"], row["y"], row["Province"])
+                    ted.penup()
+                    count+=1
+                elif row["Province"] == "Western Cape":
+                    set_word(row["x"], row["y"], row["Province"])
+                    ted.penup()
+                    count+=1
+                else:
+                    print("Wrong")
+
 turtle.exitonclick()
 
-# def get_mouse_click_coor(x, y):
-#     print(x, y)
 
-# turtle.onscreenclick(get_mouse_click_coor)
 
 
 
